@@ -143,8 +143,51 @@ const recommanderTenue = (conditions, temperature) => {
   }
   return []
 
+ // Partie 2 - Partie 2 — conditions (if indépendants car plusieurs peuvent s'appliquer)
+
+ const recos = []
+
+ if (conditions === "pluvieux") {
+    recos.push({ icone: "☂️", texte: "N'oublie pas ton parapluie" })
+  }
+  if (conditions === "orageux") {
+    recos.push({ icone: "⚠️", texte: "Évite les zones exposées" })
+  }
+  if (conditions === "neige") {
+    recos.push({ icone: "👢", texte: "Préfère des bottes imperméables" })
+  }
+  if (conditions === "ensoleille" && temperature > 20) {
+    recos.push({ icone: "🕶️", texte: "Pense à la crème solaire" })
+  }
+
+  // On retourne le tableau rempli
+  return recos
 
 
+// ligne 110
+
+const afficherResultat = (temperature, conditions) => {
+  const emoji       = choisirEmoji(conditions, temperature)
+  const description = decrireMeteo(conditions, temperature)
+  const recos       = recommanderTenue(conditions, temperature)
+
+  meteoEmoji.textContent       = emoji || "🌡️"
+  meteoDescription.textContent = description || "—"
+  meteoTemperature.textContent = temperature + "°C — " + conditions
+
+  divRecommandations.innerHTML = ""
+
+  if (recos && recos.length > 0) {
+    recos.forEach((reco) => {
+      const div = document.createElement("div")
+      div.classList.add("reco-item")
+      div.innerHTML = `<span class="reco-icon">${reco.icone}</span><span>${reco.texte}</span>`
+      divRecommandations.appendChild(div)
+    })
+  }
+
+  sectionResultat.classList.remove("cache")
+}
 
 // ── Affichage du résultat ────────────────────
 // Cette partie est déjà écrite — ne pas modifier.
@@ -165,3 +208,4 @@ btnAnalyser.addEventListener("click", () => {
 
   afficherResultat(temperature, conditions)
 })
+
