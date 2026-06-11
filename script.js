@@ -38,7 +38,6 @@ const divRecommandations = document.getElementById("recommandations")
 //   autre valeur                      → "🌡️"
 
 const choisirEmoji = (conditions, temperature) => {
-    
   if (conditions === "ensoleille" && temperature > 25) 
   return "🌞"
 
@@ -61,6 +60,7 @@ const choisirEmoji = (conditions, temperature) => {
   return "🌫️"
 
   return "🌡️" 
+
 }
 
 
@@ -79,8 +79,7 @@ const choisirEmoji = (conditions, temperature) => {
 // Exemple : decrireMeteo("pluvieux", 8) → "Temps froid et pluvieux"
 
 const decrireMeteo = (conditions, temperature) => {
-
-let description = ""
+  let description = ""
 
 if (temperature < 0)  
   description = "temps glacial"
@@ -109,6 +108,7 @@ if (conditions === "brouillard")
 return description
 }
 
+
 // ── TODO : recommanderTenue ──────────────────
 // Reçoit les conditions météo (string) et la température (number).
 // Retourne un tableau de recommandations.
@@ -130,8 +130,7 @@ return description
 //   et température > 20        → ajouter { icone: "🕶️", texte: "Pense à la crème solaire" }
 
 const recommanderTenue = (conditions, temperature) => {
-
- // Partie 1 — température
+  // Partie 1 — température
   if (temperature < 0) {
     return [{ icone: "🧥", texte: "Manteau d'hiver indispensable" }]
   } else if (temperature < 10) {
@@ -141,8 +140,9 @@ const recommanderTenue = (conditions, temperature) => {
   } else if (temperature >= 30) {
     return [{ icone: "👕", texte: "Habits légers recommandés" }]
   }
-  return []
 
+  return []
+} 
  // Partie 2 - Partie 2 — conditions (if indépendants car plusieurs peuvent s'appliquer)
 
  const recos = []
@@ -164,7 +164,10 @@ const recommanderTenue = (conditions, temperature) => {
   return recos
 
 
-// ligne 110
+
+// ── Affichage du résultat ────────────────────
+// Cette partie est déjà écrite — ne pas modifier.
+// Elle utilise tes fonctions pour mettre à jour la page.
 
 const afficherResultat = (temperature, conditions) => {
   const emoji       = choisirEmoji(conditions, temperature)
@@ -189,10 +192,6 @@ const afficherResultat = (temperature, conditions) => {
   sectionResultat.classList.remove("cache")
 }
 
-// ── Affichage du résultat ────────────────────
-// Cette partie est déjà écrite — ne pas modifier.
-// Elle utilise tes fonctions pour mettre à jour la page.
-
 
 // ── Écouteur d'événement ─────────────────────
 // Déjà écrit — déclenche l'affichage au clic.
@@ -208,4 +207,3 @@ btnAnalyser.addEventListener("click", () => {
 
   afficherResultat(temperature, conditions)
 })
-
