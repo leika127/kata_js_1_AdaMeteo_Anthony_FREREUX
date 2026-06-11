@@ -109,8 +109,6 @@ if (conditions === "brouillard")
 return description
 }
 
-
-
 // ── TODO : recommanderTenue ──────────────────
 // Reçoit les conditions météo (string) et la température (number).
 // Retourne un tableau de recommandations.
@@ -130,6 +128,21 @@ return description
 //   conditions "neige"         → ajouter { icone: "👢", texte: "Préfère des bottes imperméables" }
 //   conditions "ensoleille"
 //   et température > 20        → ajouter { icone: "🕶️", texte: "Pense à la crème solaire" }
+
+const recommanderTenue = (conditions, temperature) => {
+
+ // Partie 1 — température
+  if (temperature < 0) {
+    return [{ icone: "🧥", texte: "Manteau d'hiver indispensable" }]
+  } else if (temperature < 10) {
+    return [{ icone: "🧥", texte: "Prends un manteau" }]
+  } else if (temperature < 20) {
+    return [{ icone: "🧣", texte: "Une veste suffira" }]
+  } else if (temperature >= 30) {
+    return [{ icone: "👕", texte: "Habits légers recommandés" }]
+  }
+  return []
+
 
 
 
