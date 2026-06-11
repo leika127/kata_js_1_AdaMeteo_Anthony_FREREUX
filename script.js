@@ -110,6 +110,7 @@ return description
 }
 
 
+
 // ── TODO : recommanderTenue ──────────────────
 // Reçoit les conditions météo (string) et la température (number).
 // Retourne un tableau de recommandations.
@@ -130,68 +131,11 @@ return description
 //   conditions "ensoleille"
 //   et température > 20        → ajouter { icone: "🕶️", texte: "Pense à la crème solaire" }
 
-const recommanderTenue = (conditions, temperature) => {
-
- // Partie 1 — température
-  if (temperature < 0) {
-    return [{ icone: "🧥", texte: "Manteau d'hiver indispensable" }]
-  } else if (temperature < 10) {
-    return [{ icone: "🧥", texte: "Prends un manteau" }]
-  } else if (temperature < 20) {
-    return [{ icone: "🧣", texte: "Une veste suffira" }]
-  } else if (temperature >= 30) {
-    return [{ icone: "👕", texte: "Habits légers recommandés" }]
-  }
-
-  return []
-} 
- // Partie 2 - Partie 2 — conditions (if indépendants car plusieurs peuvent s'appliquer)
-
- const recos = []
-
- if (conditions === "pluvieux") {
-    recos.push({ icone: "☂️", texte: "N'oublie pas ton parapluie" })
-  }
-  if (conditions === "orageux") {
-    recos.push({ icone: "⚠️", texte: "Évite les zones exposées" })
-  }
-  if (conditions === "neige") {
-    recos.push({ icone: "👢", texte: "Préfère des bottes imperméables" })
-  }
-  if (conditions === "ensoleille" && temperature > 20) {
-    recos.push({ icone: "🕶️", texte: "Pense à la crème solaire" })
-  }
-
-  // On retourne le tableau rempli
-  return recos
 
 
 // ── Affichage du résultat ────────────────────
 // Cette partie est déjà écrite — ne pas modifier.
 // Elle utilise tes fonctions pour mettre à jour la page.
-
-const afficherResultat = (temperature, conditions) => {
-  const emoji       = choisirEmoji(conditions, temperature)
-  const description = decrireMeteo(conditions, temperature)
-  const recos       = recommanderTenue(conditions, temperature)
-
-  meteoEmoji.textContent       = emoji || "🌡️"
-  meteoDescription.textContent = description || "—"
-  meteoTemperature.textContent = temperature + "°C — " + conditions
-
-  divRecommandations.innerHTML = ""
-
-  if (recos && recos.length > 0) {
-    recos.forEach((reco) => {
-      const div = document.createElement("div")
-      div.classList.add("reco-item")
-      div.innerHTML = `<span class="reco-icon">${reco.icone}</span><span>${reco.texte}</span>`
-      divRecommandations.appendChild(div)
-    })
-  }
-
-  sectionResultat.classList.remove("cache")
-}
 
 
 // ── Écouteur d'événement ─────────────────────
